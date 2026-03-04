@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guitar Chord Finder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Guitar Chord Finder</h1>
+      <p class="subtitle">Type a chord name to see how to play it</p>
+    </header>
+
+    <div class="search-container">
+      <div class="search-wrapper">
+        <input
+          type="text"
+          id="chord-input"
+          class="chord-input"
+          placeholder="e.g. Am, C7, Gmaj7, Bdim..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <div class="autocomplete-dropdown" id="suggestions"></div>
+      </div>
+    </div>
+
+    <div class="chord-display" id="chord-display">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">&#9835;</div>
+        <p>Search for a chord to see its diagram</p>
+      </div>
+    </div>
+
+    <div class="chord-info" id="chord-info"></div>
+  </div>
+
+  <script src="chords.js"></script>
+  <script src="renderer.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

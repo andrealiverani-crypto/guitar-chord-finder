@@ -1,0 +1,354 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* App container */
+.app {
+  width: 100%;
+  max-width: 680px;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #6c757d;
+  margin-top: 6px;
+}
+
+/* Search */
+.search-container {
+  margin-bottom: 24px;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.chord-input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 18px;
+  font-family: inherit;
+  border: 2px solid #dde1e6;
+  border-radius: 12px;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.chord-input:focus {
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
+}
+
+.chord-input::placeholder {
+  color: #adb5bd;
+}
+
+/* Autocomplete dropdown */
+.autocomplete-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #dde1e6;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.autocomplete-dropdown.open {
+  display: block;
+}
+
+.suggestion-item {
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.suggestion-item:first-child {
+  border-radius: 10px 10px 0 0;
+}
+
+.suggestion-item:last-child {
+  border-radius: 0 0 10px 10px;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: #f0f4f8;
+}
+
+.suggestion-name {
+  font-weight: 600;
+  min-width: 60px;
+}
+
+.suggestion-quality {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* Chord display */
+.chord-display {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  min-height: 280px;
+}
+
+/* Voicings header */
+.voicings-header {
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.voicings-chord-name {
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.voicings-quality {
+  font-size: 15px;
+  color: #6c757d;
+  margin-right: 10px;
+}
+
+.voicings-count {
+  display: inline-block;
+  background: #e9ecef;
+  color: #495057;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Voicings grid */
+.voicings-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.voicing-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 12px 8px 8px;
+  text-align: center;
+  flex: 0 0 auto;
+  width: 190px;
+}
+
+.voicing-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c757d;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.voicing-label-thumb {
+  color: #5a67d8;
+}
+
+.voicing-diagram .chord-svg {
+  max-width: 180px;
+}
+
+.voicing-diagram .chord-title {
+  display: none;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  color: #adb5bd;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 15px;
+}
+
+/* SVG chord diagram styles */
+.chord-svg {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+}
+
+.chord-title {
+  font-size: 20px;
+  font-weight: 700;
+  fill: #1a1a1a;
+}
+
+.chord-nut {
+  fill: #222;
+}
+
+.chord-fret-line {
+  stroke: #bbb;
+  stroke-width: 1;
+}
+
+.chord-string-line {
+  stroke: #888;
+  stroke-width: 1.2;
+}
+
+.chord-dot {
+  fill: #222;
+}
+
+.chord-finger-text {
+  fill: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.chord-open-string {
+  fill: none;
+  stroke: #444;
+  stroke-width: 1.5;
+}
+
+.chord-muted-string {
+  fill: #999;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.chord-barre {
+  fill: #222;
+}
+
+.chord-thumb-dot {
+  fill: #5a67d8;
+}
+
+.chord-thumb-text {
+  fill: #fff;
+}
+
+.chord-fret-label {
+  fill: #666;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.chord-string-label {
+  fill: #999;
+  font-size: 11px;
+  font-family: inherit;
+}
+
+/* Chord info below diagram */
+.chord-info {
+  text-align: center;
+  margin-top: 16px;
+  min-height: 20px;
+}
+
+.chord-info-text {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.chord-info-quality {
+  display: inline-block;
+  background: #e9ecef;
+  color: #495057;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .app-header h1 {
+    font-size: 24px;
+  }
+
+  .chord-input {
+    font-size: 16px;
+    padding: 12px 14px;
+  }
+
+  .chord-display {
+    padding: 16px 10px;
+  }
+
+  .voicing-card {
+    width: 160px;
+    padding: 10px 6px 6px;
+  }
+
+  .voicing-diagram .chord-svg {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 380px) {
+  .voicing-card {
+    width: 140px;
+  }
+
+  .voicing-diagram .chord-svg {
+    max-width: 130px;
+  }
+}
