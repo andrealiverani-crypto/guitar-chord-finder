@@ -5,9 +5,20 @@
   const display = document.getElementById("chord-display");
   const emptyState = document.getElementById("empty-state");
   const chordInfo = document.getElementById("chord-info");
+  const tuningSelect = document.getElementById("tuning-select");
 
   let activeIndex = -1;
   let results = [];
+  let currentTuning = window.TUNINGS[0]; // default to standard
+  let currentChord = null; // track the currently displayed chord
+
+  // Populate tuning dropdown from TUNINGS data
+  window.TUNINGS.forEach(function (t) {
+    var opt = document.createElement("option");
+    opt.value = t.id;
+    opt.textContent = t.name + " (" + t.label + ")";
+    tuningSelect.appendChild(opt);
+  });
 
   // Quality display names
   const QUALITY_LABELS = {
@@ -108,16 +119,31 @@
   // Select and render all voicings for a chord
   function selectChord(chord) {
     input.value = chord.name;
+    currentChord = chord;
     hideDropdown();
 
     display.innerHTML = "";
 
-    var voicings = chord.voicings || [chord];
+    // Get voicings for current tuning
+    var voicings = window.getVoicingsForTuning(chord, currentTuning);
+
+    // Handle no voicings found
+    if (!voicings || voicings.length === 0) {
+      display.innerHTML = '<div class="no-voicings">No playable voicings found for <strong>' +
+        escapeHtml(chord.name) + '</strong> in ' +
+        escapeHtml(currentTuning.name) + ' tuning.</div>';
+      chordInfo.innerHTML = "";
+      return;
+    }
+
     var heading = document.createElement("div");
     heading.className = "voicings-header";
     heading.innerHTML =
       '<span class="voicings-chord-name">' + escapeHtml(chord.name) + '</span>' +
       '<span class="voicings-quality">' + escapeHtml(QUALITY_LABELS[chord.quality] || chord.quality) + '</span>' +
+      (currentTuning.id !== "standard"
+        ? '<span class="voicings-tuning-badge">' + escapeHtml(currentTuning.label) + '</span>'
+        : '') +
       '<span class="voicings-count">' + voicings.length + ' voicing' + (voicings.length > 1 ? 's' : '') + '</span>';
     display.appendChild(heading);
 
@@ -143,7 +169,7 @@
         barres: voicings[i].barres,
         baseFret: voicings[i].baseFret
       };
-      window.renderChord(voicingData, diagramContainer);
+      window.renderChord(voicingData, diagramContainer, currentTuning.stringNames);
       card.appendChild(diagramContainer);
 
       grid.appendChild(card);
@@ -153,6 +179,17 @@
 
     chordInfo.innerHTML = "";
   }
+
+  // Tuning change handler
+  tuningSelect.addEventListener("change", function () {
+    var tuningId = tuningSelect.value;
+    currentTuning = window.TUNINGS.find(function (t) { return t.id === tuningId; }) || window.TUNINGS[0];
+
+    // If a chord is currently displayed, re-render with the new tuning
+    if (currentChord) {
+      selectChord(currentChord);
+    }
+  });
 
   // Event listeners
   input.addEventListener("input", function () {

@@ -24,7 +24,7 @@
     return el;
   }
 
-  function renderChord(chordData, container) {
+  function renderChord(chordData, container, customStringNames) {
     container.innerHTML = "";
 
     const svg = svgEl("svg", {
@@ -180,7 +180,7 @@
     }
 
     // String name labels below
-    const stringNames = ["E", "A", "D", "G", "B", "e"];
+    const stringNames = customStringNames || ["E", "A", "D", "G", "B", "e"];
     for (let i = 0; i < NUM_STRINGS; i++) {
       const label = svgEl("text", {
         x: DIAGRAM_X + i * STRING_SPACING,

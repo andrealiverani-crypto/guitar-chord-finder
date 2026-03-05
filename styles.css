@@ -42,6 +42,49 @@ body {
   margin-top: 6px;
 }
 
+/* Tuning selector */
+.tuning-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tuning-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.tuning-select {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 2px solid #dde1e6;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236c757d' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 30px;
+}
+
+.tuning-select:focus {
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
+}
+
 /* Search */
 .search-container {
   margin-bottom: 24px;
@@ -155,6 +198,17 @@ body {
   margin-right: 10px;
 }
 
+.voicings-tuning-badge {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
 .voicings-count {
   display: inline-block;
   background: #e9ecef;
@@ -201,6 +255,19 @@ body {
 
 .voicing-diagram .chord-title {
   display: none;
+}
+
+/* No voicings message */
+.no-voicings {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.no-voicings strong {
+  color: #1a1a1a;
 }
 
 /* Empty state */
@@ -322,6 +389,16 @@ body {
 @media (max-width: 500px) {
   .app-header h1 {
     font-size: 24px;
+  }
+
+  .tuning-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .tuning-label {
+    margin-bottom: 0;
   }
 
   .chord-input {
