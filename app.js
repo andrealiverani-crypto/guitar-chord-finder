@@ -177,8 +177,16 @@
 
     display.appendChild(grid);
 
-    chordInfo.innerHTML = "";
+    // Render progressions below voicings
+    if (window.renderProgressions) {
+      window.renderProgressions(chord, chordInfo);
+    } else {
+      chordInfo.innerHTML = "";
+    }
   }
+
+  // Expose selectChord for external use (progressions chips)
+  window.selectChord = selectChord;
 
   // Tuning change handler
   tuningSelect.addEventListener("change", function () {

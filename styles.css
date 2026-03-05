@@ -364,25 +364,111 @@ body {
 
 /* Chord info below diagram */
 .chord-info {
-  text-align: center;
   margin-top: 16px;
-  min-height: 20px;
 }
 
-.chord-info-text {
-  font-size: 14px;
-  color: #6c757d;
+/* Progressions section */
+.progressions-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-.chord-info-quality {
-  display: inline-block;
-  background: #e9ecef;
-  color: #495057;
-  padding: 4px 12px;
-  border-radius: 20px;
+.progressions-header {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.progression-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.progression-row:last-child {
+  border-bottom: none;
+}
+
+.progression-name {
   font-size: 13px;
-  font-weight: 500;
-  margin-top: 4px;
+  font-weight: 600;
+  color: #495057;
+  min-width: 130px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.progression-subtitle {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.progression-chords {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.progression-arrow {
+  font-size: 13px;
+  color: #adb5bd;
+}
+
+.progression-chip {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  background: #f0f4f8;
+  color: #1a1a1a;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.progression-chip:hover {
+  background: #dbeafe;
+  border-color: #4a90d9;
+  transform: translateY(-1px);
+}
+
+.progression-chip:active {
+  transform: translateY(0);
+}
+
+.progression-chip-active {
+  background: #4a90d9;
+  color: #fff;
+  border-color: #4a90d9;
+}
+
+.progression-chip-active:hover {
+  background: #3b7dd8;
+  border-color: #3b7dd8;
+}
+
+.progression-chip-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.progression-chip-disabled:hover {
+  background: #f0f4f8;
+  border-color: transparent;
+  transform: none;
 }
 
 /* Responsive */
@@ -417,6 +503,20 @@ body {
 
   .voicing-diagram .chord-svg {
     max-width: 150px;
+  }
+
+  .progression-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .progression-name {
+    min-width: auto;
+  }
+
+  .progressions-section {
+    padding: 16px 12px;
   }
 }
 
