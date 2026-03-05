@@ -471,6 +471,62 @@ body {
   transform: none;
 }
 
+/* Play buttons */
+.play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #4a90d9;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.1s;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 0;
+}
+
+.play-btn:hover {
+  background: #3b7dd8;
+  transform: scale(1.1);
+}
+
+.play-btn:active {
+  transform: scale(0.95);
+}
+
+.play-btn.playing {
+  background: #e53e3e;
+  animation: pulse-play 0.8s ease-in-out infinite;
+}
+
+@keyframes pulse-play {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.voicing-play-btn {
+  margin: 4px auto 6px;
+  width: 28px;
+  height: 28px;
+  font-size: 11px;
+}
+
+.progression-play-btn {
+  margin-right: 6px;
+}
+
+.chord-playing {
+  background: #4a90d9 !important;
+  color: #fff !important;
+  border-color: #4a90d9 !important;
+  box-shadow: 0 0 8px rgba(74, 144, 217, 0.4);
+}
+
 /* Responsive */
 @media (max-width: 500px) {
   .app-header h1 {
@@ -517,6 +573,18 @@ body {
 
   .progressions-section {
     padding: 16px 12px;
+  }
+
+  .play-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .voicing-play-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
   }
 }
 

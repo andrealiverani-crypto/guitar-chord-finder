@@ -159,6 +159,23 @@
       label.textContent = voicings[i].thumb ? "Thumb" : "Position " + (i + 1);
       card.appendChild(label);
 
+      // Play button for this voicing
+      var playBtn = document.createElement("button");
+      playBtn.type = "button";
+      playBtn.className = "play-btn voicing-play-btn";
+      playBtn.innerHTML = "&#9654;";
+      playBtn.title = "Play this voicing";
+      playBtn.setAttribute("aria-label", "Play voicing");
+      (function (v, btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          window.playChordSound(v.frets, currentTuning.notes, v.baseFret);
+          btn.classList.add("playing");
+          setTimeout(function () { btn.classList.remove("playing"); }, 1800);
+        });
+      })(voicings[i], playBtn);
+      card.appendChild(playBtn);
+
       var diagramContainer = document.createElement("div");
       diagramContainer.className = "voicing-diagram";
       // Build a chord-like object for the renderer
@@ -185,8 +202,9 @@
     }
   }
 
-  // Expose selectChord for external use (progressions chips)
+  // Expose selectChord and currentTuning for external use
   window.selectChord = selectChord;
+  window.getCurrentTuning = function () { return currentTuning; };
 
   // Tuning change handler
   tuningSelect.addEventListener("change", function () {

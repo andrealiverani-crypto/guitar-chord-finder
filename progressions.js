@@ -310,6 +310,15 @@
       var row = document.createElement("div");
       row.className = "progression-row";
 
+      // Play button for the whole progression
+      var progPlayBtn = document.createElement("button");
+      progPlayBtn.type = "button";
+      progPlayBtn.className = "play-btn progression-play-btn";
+      progPlayBtn.innerHTML = "&#9654;";
+      progPlayBtn.title = "Play progression";
+      progPlayBtn.setAttribute("aria-label", "Play progression");
+      row.appendChild(progPlayBtn);
+
       // Progression name + optional subtitle
       var nameEl = document.createElement("div");
       nameEl.className = "progression-name";
@@ -364,6 +373,63 @@
       }
 
       row.appendChild(chordSeq);
+
+      // Wire up progression play button
+      (function (progData, seqContainer, playButton) {
+        playButton.addEventListener("click", function () {
+          var tuning = window.getCurrentTuning ? window.getCurrentTuning() : window.TUNINGS[0];
+          var chordDataList = [];
+
+          // Resolve each chord to its first voicing
+          for (var k = 0; k < progData.chords.length; k++) {
+            var entry = progData.chords[k];
+            if (!entry.chord) continue;
+            var voicings = window.getVoicingsForTuning(entry.chord, tuning);
+            if (!voicings || voicings.length === 0) continue;
+            chordDataList.push({
+              frets: voicings[0].frets,
+              baseFret: voicings[0].baseFret,
+              chipIndex: k
+            });
+          }
+
+          if (chordDataList.length === 0) return;
+
+          // If already playing, stop
+          if (playButton.classList.contains("playing")) {
+            window.stopAllAudio();
+            playButton.classList.remove("playing");
+            playButton.innerHTML = "&#9654;";
+            var allChips = seqContainer.querySelectorAll(".progression-chip");
+            for (var c = 0; c < allChips.length; c++) {
+              allChips[c].classList.remove("chord-playing");
+            }
+            return;
+          }
+
+          playButton.classList.add("playing");
+          playButton.innerHTML = "&#9632;"; // stop icon
+
+          window.playProgression(chordDataList, tuning.notes, function (idx) {
+            var allChips = seqContainer.querySelectorAll(".progression-chip");
+            for (var c = 0; c < allChips.length; c++) {
+              allChips[c].classList.remove("chord-playing");
+            }
+
+            if (idx >= 0 && idx < chordDataList.length) {
+              var chipIdx = chordDataList[idx].chipIndex;
+              if (allChips[chipIdx]) {
+                allChips[chipIdx].classList.add("chord-playing");
+              }
+            } else {
+              // Playback ended
+              playButton.classList.remove("playing");
+              playButton.innerHTML = "&#9654;";
+            }
+          });
+        });
+      })(prog, chordSeq, progPlayBtn);
+
       section.appendChild(row);
     }
 
