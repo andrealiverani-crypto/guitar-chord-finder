@@ -10,7 +10,10 @@
   <div class="app">
     <header class="app-header">
       <h1>Guitar Chord Finder</h1>
-      <p class="subtitle">Type a chord name to see how to play it</p>
+      <p class="subtitle">Select a chord to see how to play it</p>
+      <button class="tuner-toggle-btn" id="tuner-toggle" type="button">
+        <span class="tuner-toggle-icon">&#127925;</span> Tuner
+      </button>
     </header>
 
     <div class="search-container">
@@ -18,23 +21,40 @@
         <label for="tuning-select" class="tuning-label">Tuning</label>
         <select id="tuning-select" class="tuning-select"></select>
       </div>
-      <div class="search-wrapper">
-        <input
-          type="text"
-          id="chord-input"
-          class="chord-input"
-          placeholder="e.g. Am, C7, Gmaj7, Bdim..."
-          autocomplete="off"
-          spellcheck="false"
-        >
-        <div class="autocomplete-dropdown" id="suggestions"></div>
+      <div class="chord-selector-row">
+        <div class="selector-group">
+          <label for="root-select" class="selector-label">Root</label>
+          <select id="root-select" class="chord-select"></select>
+        </div>
+        <div class="selector-group">
+          <label for="quality-select" class="selector-label">Type</label>
+          <select id="quality-select" class="chord-select"></select>
+        </div>
       </div>
+    </div>
+
+    <div class="tuner-panel" id="tuner-panel" style="display:none">
+      <div class="tuner-header">
+        <h3>Guitar Tuner</h3>
+        <button class="tuner-close-btn" id="tuner-close" type="button">&times;</button>
+      </div>
+      <div class="tuner-note" id="tuner-note">--</div>
+      <div class="tuner-gauge" id="tuner-gauge">
+        <div class="tuner-gauge-bar">
+          <div class="tuner-needle" id="tuner-needle"></div>
+        </div>
+        <div class="tuner-labels"><span>&#9837;</span><span>&#9839;</span></div>
+      </div>
+      <div class="tuner-cents" id="tuner-cents">0 cents</div>
+      <div class="tuner-freq" id="tuner-freq">--</div>
+      <div class="tuner-in-tune" id="tuner-in-tune" style="display:none">In Tune!</div>
+      <div class="tuner-strings" id="tuner-strings"></div>
     </div>
 
     <div class="chord-display" id="chord-display">
       <div class="empty-state" id="empty-state">
         <div class="empty-icon">&#9835;</div>
-        <p>Search for a chord to see its diagram</p>
+        <p>Select a chord to see its diagram</p>
       </div>
     </div>
 
@@ -46,6 +66,7 @@
   <script src="renderer.js"></script>
   <script src="progressions.js"></script>
   <script src="audio.js"></script>
+  <script src="tuner.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

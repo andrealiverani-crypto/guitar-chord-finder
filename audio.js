@@ -16,6 +16,9 @@
     return audioCtx;
   }
 
+  // Expose shared AudioContext for tuner
+  window.getAudioContext = getOrCreateContext;
+
   function midiToFrequency(midi) {
     return 440 * Math.pow(2, (midi - 69) / 12);
   }
@@ -38,38 +41,38 @@
     var buffer = ctx.createBuffer(1, bufferLength, sampleRate);
     var data = buffer.getChannelData(0);
 
-    // ── Shaped initial excitation (softer than raw white noise) ──
-    // Pre-filter the noise burst for a warmer pluck attack
+    // ── Heavily shaped initial excitation for warm nylon-like attack ──
     var prev = 0;
+    var prev2 = 0;
     for (var i = 0; i < delayLength && i < bufferLength; i++) {
       var noise = Math.random() * 2 - 1;
-      // Simple low-pass on the excitation: mix with previous sample
-      // Lower strings get more filtering (warmer attack)
-      var excitationSmooth = 0.4 + stringIndex * 0.05; // 0.40→0.65
-      data[i] = noise * (1 - excitationSmooth) + prev * excitationSmooth;
-      prev = data[i];
+      // Aggressive low-pass on excitation: two-stage smoothing
+      var excitationSmooth = 0.50 + stringIndex * 0.05; // 0.50→0.75
+      var filtered = noise * (1 - excitationSmooth) + prev * excitationSmooth;
+      // Second stage smoothing for extra warmth
+      filtered = filtered * 0.6 + prev2 * 0.4;
+      data[i] = filtered;
+      prev2 = prev;
+      prev = filtered;
     }
 
     // ── Extended Karplus-Strong with warm damping ──
-    // Higher damping = more HF loss per cycle = warmer tone
-    // Acoustic guitar: all strings relatively warm, bass strings warmest
-    var dampingBase = 0.520; // much warmer than the 0.498 default
-    var dampingPerString = -0.004; // treble strings slightly brighter
+    var dampingBase = 0.545;
+    var dampingPerString = -0.005;
     var damping = dampingBase + stringIndex * dampingPerString;
-    // Result: string 0 (low E) = 0.520, string 5 (high e) = 0.500
+    // Result: string 0 (low E) = 0.545, string 5 (high e) = 0.520
 
-    // Energy loss per sample (controls sustain length)
-    var decay = 0.9996; // slightly less sustain than 0.998 for natural feel
+    var decay = 0.9996;
 
     for (var i = delayLength; i < bufferLength; i++) {
-      // Two-point weighted average (low-pass) + 4-point smoothing for extra warmth
+      // Two-point weighted average (low-pass)
       var twoPoint = data[i - delayLength] * damping +
                      data[i - delayLength + 1] * (1 - damping);
 
-      // Additional smoothing: blend with neighboring delay samples
+      // Additional 4-point smoothing for extra warmth
       var idx2 = i - delayLength + 2;
       if (idx2 < i && idx2 >= 0) {
-        twoPoint = twoPoint * 0.85 + data[idx2] * 0.15;
+        twoPoint = twoPoint * 0.80 + data[idx2] * 0.20;
       }
 
       data[i] = twoPoint * decay;
@@ -78,31 +81,46 @@
     return buffer;
   }
 
-  // Create a body resonance filter chain (simulates acoustic guitar body)
+  // Create an acoustic guitar body resonance filter chain
   function createBodyFilter(ctx) {
     // Low-pass to cut harsh highs
     var lowpass = ctx.createBiquadFilter();
     lowpass.type = "lowpass";
-    lowpass.frequency.value = 3500; // cut above 3.5kHz
-    lowpass.Q.value = 0.7;
+    lowpass.frequency.value = 2800;
+    lowpass.Q.value = 0.8;
 
-    // Gentle peak at ~200Hz for body warmth
+    // Body resonance at ~180Hz for warmth
     var bodyResonance = ctx.createBiquadFilter();
     bodyResonance.type = "peaking";
-    bodyResonance.frequency.value = 200;
-    bodyResonance.gain.value = 3; // +3dB body warmth
-    bodyResonance.Q.value = 1.2;
+    bodyResonance.frequency.value = 180;
+    bodyResonance.gain.value = 4;
+    bodyResonance.Q.value = 1.0;
 
-    // Slight presence dip at ~2kHz to reduce harshness
+    // Wood character at ~400Hz
+    var woodResonance = ctx.createBiquadFilter();
+    woodResonance.type = "peaking";
+    woodResonance.frequency.value = 400;
+    woodResonance.gain.value = 2;
+    woodResonance.Q.value = 0.8;
+
+    // Presence dip to remove harshness
     var presenceDip = ctx.createBiquadFilter();
     presenceDip.type = "peaking";
-    presenceDip.frequency.value = 2200;
-    presenceDip.gain.value = -2; // -2dB
+    presenceDip.frequency.value = 2500;
+    presenceDip.gain.value = -4;
     presenceDip.Q.value = 1.0;
 
-    // Chain: source → bodyResonance → presenceDip → lowpass → destination
-    bodyResonance.connect(presenceDip);
-    presenceDip.connect(lowpass);
+    // High-shelf rolloff above 2kHz
+    var highShelf = ctx.createBiquadFilter();
+    highShelf.type = "highshelf";
+    highShelf.frequency.value = 2000;
+    highShelf.gain.value = -3;
+
+    // Chain: source → body → wood → presenceDip → highShelf → lowpass → destination
+    bodyResonance.connect(woodResonance);
+    woodResonance.connect(presenceDip);
+    presenceDip.connect(highShelf);
+    highShelf.connect(lowpass);
 
     return { input: bodyResonance, output: lowpass };
   }
@@ -113,7 +131,7 @@
   window.playChordSound = function (frets, tuningNotes, baseFret) {
     window.stopAllAudio();
     var ctx = getOrCreateContext();
-    var strumDelay = 0.035;  // 35ms between strings (slightly slower strum)
+    var strumDelay = 0.038;  // 38ms between strings
     var duration = 2.2;
     var now = ctx.currentTime;
 
@@ -136,7 +154,7 @@
 
       // Soft attack: ramp up quickly then decay naturally
       gain.gain.setValueAtTime(0.0, stringTime);
-      gain.gain.linearRampToValueAtTime(0.20, stringTime + 0.008);
+      gain.gain.linearRampToValueAtTime(0.18, stringTime + 0.012);
       gain.gain.exponentialRampToValueAtTime(0.001, stringTime + duration);
 
       source.connect(gain);
