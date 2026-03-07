@@ -598,6 +598,28 @@ body {
   transform: none;
 }
 
+/* Progression pattern (Roman numerals) */
+.progression-pattern {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  padding-left: 44px;
+  font-size: 11px;
+  color: #adb5bd;
+}
+
+.progression-pattern-item {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.progression-pattern-arrow {
+  font-size: 11px;
+  color: #d0d8e0;
+}
+
 /* Play buttons */
 .play-btn {
   display: inline-flex;
@@ -696,6 +718,11 @@ body {
 
   .progression-name {
     min-width: auto;
+  }
+
+  .progression-pattern {
+    padding-left: 0;
+    margin-top: 8px;
   }
 
   .progressions-section {

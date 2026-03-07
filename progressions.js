@@ -22,7 +22,8 @@
     major: [
       {
         name: "Pop Progression",
-        label: "I \u2013 V \u2013 vi \u2013 IV",
+        label: "I - V - vi - IV",
+        romanNumerals: ["I", "V", "vi", "IV"],
         chords: [
           { semitones: 0, quality: "major" },
           { semitones: 7, quality: "major" },
@@ -32,7 +33,8 @@
       },
       {
         name: "50s Doo-Wop",
-        label: "I \u2013 vi \u2013 IV \u2013 V",
+        label: "I - vi - IV - V",
+        romanNumerals: ["I", "vi", "IV", "V"],
         chords: [
           { semitones: 0, quality: "major" },
           { semitones: 9, quality: "minor" },
@@ -42,7 +44,8 @@
       },
       {
         name: "Blues / Rock",
-        label: "I \u2013 IV \u2013 V \u2013 I",
+        label: "I - IV - V - I",
+        romanNumerals: ["I", "IV", "V", "I"],
         chords: [
           { semitones: 0, quality: "major" },
           { semitones: 5, quality: "major" },
@@ -52,7 +55,8 @@
       },
       {
         name: "Country",
-        label: "I \u2013 V \u2013 IV \u2013 I",
+        label: "I - V - IV - I",
+        romanNumerals: ["I", "V", "IV", "I"],
         chords: [
           { semitones: 0, quality: "major" },
           { semitones: 7, quality: "major" },
@@ -62,11 +66,56 @@
       },
       {
         name: "Pop Ballad",
-        label: "I \u2013 IV \u2013 vi \u2013 V",
+        label: "I - IV - vi - V",
+        romanNumerals: ["I", "IV", "vi", "V"],
         chords: [
           { semitones: 0, quality: "major" },
           { semitones: 5, quality: "major" },
           { semitones: 9, quality: "minor" },
+          { semitones: 7, quality: "major" }
+        ]
+      },
+      {
+        name: "Sensitive Cadence",
+        label: "I - vi - IV - V",
+        romanNumerals: ["I", "vi", "IV", "V"],
+        chords: [
+          { semitones: 0, quality: "major" },
+          { semitones: 9, quality: "minor" },
+          { semitones: 5, quality: "major" },
+          { semitones: 7, quality: "major" }
+        ]
+      },
+      {
+        name: "Basic Loop",
+        label: "I - IV - I - V",
+        romanNumerals: ["I", "IV", "I", "V"],
+        chords: [
+          { semitones: 0, quality: "major" },
+          { semitones: 5, quality: "major" },
+          { semitones: 0, quality: "major" },
+          { semitones: 7, quality: "major" }
+        ]
+      },
+      {
+        name: "Jazz iii-vi-ii-V",
+        label: "iii - vi - ii - V",
+        romanNumerals: ["iii", "vi", "ii", "V"],
+        chords: [
+          { semitones: 4, quality: "minor" },
+          { semitones: 9, quality: "minor" },
+          { semitones: 2, quality: "minor" },
+          { semitones: 7, quality: "major" }
+        ]
+      },
+      {
+        name: "Uplifting",
+        label: "I - V - IV - V",
+        romanNumerals: ["I", "V", "IV", "V"],
+        chords: [
+          { semitones: 0, quality: "major" },
+          { semitones: 7, quality: "major" },
+          { semitones: 5, quality: "major" },
           { semitones: 7, quality: "major" }
         ]
       }
@@ -75,7 +124,8 @@
     minor: [
       {
         name: "Minor Pop",
-        label: "i \u2013 iv \u2013 VII \u2013 III",
+        label: "i - iv - VII - III",
+        romanNumerals: ["i", "iv", "VII", "III"],
         chords: [
           { semitones: 0, quality: "minor" },
           { semitones: 5, quality: "minor" },
@@ -85,7 +135,8 @@
       },
       {
         name: "Andalusian Cadence",
-        label: "i \u2013 VII \u2013 VI \u2013 V",
+        label: "i - VII - VI - V",
+        romanNumerals: ["i", "VII", "VI", "V"],
         chords: [
           { semitones: 0, quality: "minor" },
           { semitones: 10, quality: "major" },
@@ -95,8 +146,9 @@
       },
       {
         name: "Axis of Awesome",
-        label: "vi \u2013 IV \u2013 I \u2013 V",
+        label: "vi - IV - I - V",
         subtitle: "as vi in relative major",
+        romanNumerals: ["vi", "IV", "I", "V"],
         chords: [
           { semitones: 0, quality: "minor" },
           { semitones: 8, quality: "major" },
@@ -106,7 +158,8 @@
       },
       {
         name: "Epic Minor",
-        label: "i \u2013 VI \u2013 III \u2013 VII",
+        label: "i - VI - III - VII",
+        romanNumerals: ["i", "VI", "III", "VII"],
         chords: [
           { semitones: 0, quality: "minor" },
           { semitones: 8, quality: "major" },
@@ -116,7 +169,8 @@
       },
       {
         name: "Minor Blues",
-        label: "i \u2013 iv \u2013 v \u2013 i",
+        label: "i - iv - v - i",
+        romanNumerals: ["i", "iv", "v", "i"],
         chords: [
           { semitones: 0, quality: "minor" },
           { semitones: 5, quality: "minor" },
@@ -126,13 +180,47 @@
       },
       {
         name: "Melancholic",
-        label: "vi \u2013 V \u2013 IV \u2013 V",
+        label: "vi - V - IV - V",
         subtitle: "as vi in relative major",
+        romanNumerals: ["vi", "V", "IV", "V"],
         chords: [
           { semitones: 0, quality: "minor" },
           { semitones: 10, quality: "major" },
           { semitones: 8, quality: "major" },
           { semitones: 10, quality: "major" }
+        ]
+      },
+      {
+        name: "Phrygian Motion",
+        label: "i - VII - VI - V",
+        romanNumerals: ["i", "VII", "VI", "V"],
+        chords: [
+          { semitones: 0, quality: "minor" },
+          { semitones: 10, quality: "major" },
+          { semitones: 8, quality: "major" },
+          { semitones: 7, quality: "major" }
+        ]
+      },
+      {
+        name: "Natural Minor Descent",
+        label: "i - VI - VII - VI",
+        romanNumerals: ["i", "VI", "VII", "VI"],
+        chords: [
+          { semitones: 0, quality: "minor" },
+          { semitones: 8, quality: "major" },
+          { semitones: 10, quality: "major" },
+          { semitones: 8, quality: "major" }
+        ]
+      },
+      {
+        name: "Minor Funk",
+        label: "i - v - iv - i",
+        romanNumerals: ["i", "v", "iv", "i"],
+        chords: [
+          { semitones: 0, quality: "minor" },
+          { semitones: 7, quality: "minor" },
+          { semitones: 5, quality: "minor" },
+          { semitones: 0, quality: "minor" }
         ]
       }
     ],
@@ -140,7 +228,8 @@
     "7": [
       {
         name: "Blues Shuffle",
-        label: "I7 \u2013 IV7 \u2013 I7 \u2013 V7",
+        label: "I7 - IV7 - I7 - V7",
+        romanNumerals: ["I7", "IV7", "I7", "V7"],
         chords: [
           { semitones: 0, quality: "7" },
           { semitones: 5, quality: "7" },
@@ -150,7 +239,8 @@
       },
       {
         name: "Blues Turnaround",
-        label: "I7 \u2013 IV7 \u2013 V7 \u2013 I7",
+        label: "I7 - IV7 - V7 - I7",
+        romanNumerals: ["I7", "IV7", "V7", "I7"],
         chords: [
           { semitones: 0, quality: "7" },
           { semitones: 5, quality: "7" },
@@ -160,8 +250,9 @@
       },
       {
         name: "Jazz Resolution",
-        label: "V7 \u2013 I",
+        label: "V7 - I",
         subtitle: "as V7 resolving",
+        romanNumerals: ["V7", "I"],
         chords: [
           { semitones: 0, quality: "7" },
           { semitones: 5, quality: "major" }
@@ -169,12 +260,44 @@
       },
       {
         name: "Jazz ii-V-I",
-        label: "ii7 \u2013 V7 \u2013 I",
+        label: "ii7 - V7 - I",
         subtitle: "as V7 resolving",
+        romanNumerals: ["ii7", "V7", "I"],
         chords: [
           { semitones: 7, quality: "min7" },
           { semitones: 0, quality: "7" },
           { semitones: 5, quality: "major" }
+        ]
+      },
+      {
+        name: "Tritone Substitution",
+        label: "I7 - bII7 - I7",
+        romanNumerals: ["I7", "bII7", "I7"],
+        chords: [
+          { semitones: 0, quality: "7" },
+          { semitones: 1, quality: "7" },
+          { semitones: 0, quality: "7" }
+        ]
+      },
+      {
+        name: "Bebop Turnaround",
+        label: "ii7 - V7 - I7",
+        romanNumerals: ["ii7", "V7", "I7"],
+        chords: [
+          { semitones: 2, quality: "min7" },
+          { semitones: 7, quality: "7" },
+          { semitones: 0, quality: "7" }
+        ]
+      },
+      {
+        name: "Extended Blues",
+        label: "I7 - IV7 - V7 - I7",
+        romanNumerals: ["I7", "IV7", "V7", "I7"],
+        chords: [
+          { semitones: 0, quality: "7" },
+          { semitones: 5, quality: "7" },
+          { semitones: 7, quality: "7" },
+          { semitones: 0, quality: "7" }
         ]
       }
     ],
@@ -182,7 +305,8 @@
     maj7: [
       {
         name: "Jazz ii-V-I",
-        label: "ii7 \u2013 V7 \u2013 Imaj7",
+        label: "ii7 - V7 - Imaj7",
+        romanNumerals: ["ii7", "V7", "Imaj7"],
         chords: [
           { semitones: 2, quality: "min7" },
           { semitones: 7, quality: "7" },
@@ -191,7 +315,8 @@
       },
       {
         name: "Bossa Nova",
-        label: "Imaj7 \u2013 ii7 \u2013 V7 \u2013 Imaj7",
+        label: "Imaj7 - ii7 - V7 - Imaj7",
+        romanNumerals: ["Imaj7", "ii7", "V7", "Imaj7"],
         chords: [
           { semitones: 0, quality: "maj7" },
           { semitones: 2, quality: "min7" },
@@ -200,12 +325,33 @@
         ]
       },
       {
-        name: "Pop Progression",
-        label: "I \u2013 V \u2013 vi \u2013 IV",
+        name: "Pop Maj7",
+        label: "I - V - vi - IV",
+        romanNumerals: ["Imaj7", "V", "vi", "IV"],
         chords: [
           { semitones: 0, quality: "maj7" },
           { semitones: 7, quality: "major" },
           { semitones: 9, quality: "minor" },
+          { semitones: 5, quality: "major" }
+        ]
+      },
+      {
+        name: "Smooth Maj7 Cadence",
+        label: "Imaj7 - IV - Imaj7",
+        romanNumerals: ["Imaj7", "IV", "Imaj7"],
+        chords: [
+          { semitones: 0, quality: "maj7" },
+          { semitones: 5, quality: "major" },
+          { semitones: 0, quality: "maj7" }
+        ]
+      },
+      {
+        name: "Maj7 Descending",
+        label: "Imaj7 - VImaj7 - IV",
+        romanNumerals: ["Imaj7", "VImaj7", "IV"],
+        chords: [
+          { semitones: 0, quality: "maj7" },
+          { semitones: 5, quality: "maj7" },
           { semitones: 5, quality: "major" }
         ]
       }
@@ -214,7 +360,8 @@
     min7: [
       {
         name: "Minor ii-V-i",
-        label: "ii\u00f8 \u2013 V7 \u2013 i7",
+        label: "iiø - V7 - i7",
+        romanNumerals: ["iiø", "V7", "i7"],
         chords: [
           { semitones: 2, quality: "dim" },
           { semitones: 7, quality: "7" },
@@ -223,7 +370,8 @@
       },
       {
         name: "Minor Pop",
-        label: "i7 \u2013 iv \u2013 VII \u2013 III",
+        label: "i7 - iv - VII - III",
+        romanNumerals: ["i7", "iv", "VII", "III"],
         chords: [
           { semitones: 0, quality: "min7" },
           { semitones: 5, quality: "minor" },
@@ -233,18 +381,94 @@
       },
       {
         name: "Andalusian Cadence",
-        label: "i \u2013 VII \u2013 VI \u2013 V",
+        label: "i7 - VII - VI - V",
+        romanNumerals: ["i7", "VII", "VI", "V"],
         chords: [
           { semitones: 0, quality: "min7" },
           { semitones: 10, quality: "major" },
           { semitones: 8, quality: "major" },
           { semitones: 7, quality: "major" }
         ]
+      },
+      {
+        name: "Minor Funk",
+        label: "im7 - iv7 - i7",
+        romanNumerals: ["im7", "iv7", "i7"],
+        chords: [
+          { semitones: 0, quality: "min7" },
+          { semitones: 5, quality: "min7" },
+          { semitones: 0, quality: "min7" }
+        ]
+      },
+      {
+        name: "Minor ii-V Extended",
+        label: "iiø7 - V7alt - i7",
+        romanNumerals: ["iiø7", "V7alt", "i7"],
+        chords: [
+          { semitones: 2, quality: "dim" },
+          { semitones: 7, quality: "7" },
+          { semitones: 0, quality: "min7" }
+        ]
+      },
+      {
+        name: "Soul/R&B",
+        label: "i7 - v7 - iv7 - i7",
+        romanNumerals: ["i7", "v7", "iv7", "i7"],
+        chords: [
+          { semitones: 0, quality: "min7" },
+          { semitones: 7, quality: "min7" },
+          { semitones: 5, quality: "min7" },
+          { semitones: 0, quality: "min7" }
+        ]
       }
     ],
 
-    sus2: [],
-    sus4: [],
+    sus2: [
+      {
+        name: "Sus2 Lift",
+        label: "I - Isus2 - V",
+        romanNumerals: ["I", "Isus2", "V"],
+        chords: [
+          { semitones: 0, quality: "major" },
+          { semitones: 0, quality: "sus2" },
+          { semitones: 7, quality: "major" }
+        ]
+      },
+      {
+        name: "Sus2 Rocking",
+        label: "Isus2 - IV - Isus2",
+        romanNumerals: ["Isus2", "IV", "Isus2"],
+        chords: [
+          { semitones: 0, quality: "sus2" },
+          { semitones: 5, quality: "major" },
+          { semitones: 0, quality: "sus2" }
+        ]
+      }
+    ],
+
+    sus4: [
+      {
+        name: "Sus4 Resolution",
+        label: "IV - Isus4 - I",
+        romanNumerals: ["IV", "Isus4", "I"],
+        chords: [
+          { semitones: 5, quality: "major" },
+          { semitones: 0, quality: "sus4" },
+          { semitones: 0, quality: "major" }
+        ]
+      },
+      {
+        name: "Sus4 Pendulum",
+        label: "Isus4 - V - Isus4",
+        romanNumerals: ["Isus4", "V", "Isus4"],
+        chords: [
+          { semitones: 0, quality: "sus4" },
+          { semitones: 7, quality: "major" },
+          { semitones: 0, quality: "sus4" }
+        ]
+      }
+    ],
+
     dim: [],
     aug: []
   };
@@ -285,6 +509,7 @@
         name: template.name,
         label: template.label,
         subtitle: template.subtitle || null,
+        romanNumerals: template.romanNumerals || [],
         chords: resolved
       };
     });
@@ -373,6 +598,28 @@
       }
 
       row.appendChild(chordSeq);
+
+      // Roman numeral pattern row (if romanNumerals are provided)
+      if (prog.romanNumerals && prog.romanNumerals.length > 0) {
+        var patternRow = document.createElement("div");
+        patternRow.className = "progression-pattern";
+
+        for (var j = 0; j < prog.romanNumerals.length; j++) {
+          if (j > 0) {
+            var patternArrow = document.createElement("span");
+            patternArrow.className = "progression-pattern-arrow";
+            patternArrow.textContent = "\u2192";
+            patternRow.appendChild(patternArrow);
+          }
+
+          var patternItem = document.createElement("span");
+          patternItem.className = "progression-pattern-item";
+          patternItem.textContent = prog.romanNumerals[j];
+          patternRow.appendChild(patternItem);
+        }
+
+        row.appendChild(patternRow);
+      }
 
       // Wire up progression play button
       (function (progData, seqContainer, playButton) {
